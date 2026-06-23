@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../context/TranslationContext';
 import { 
   TrendingUp, AlertTriangle, Activity, Image as ImageIcon, 
   RefreshCw, PlusCircle, Check, X, ShieldCheck
@@ -7,6 +8,7 @@ import {
 
 const Dashboard = () => {
   const { user, authenticatedFetch } = useAuth();
+  const { t } = useTranslation();
   const [data, setData] = useState(null);
   const [fields, setFields] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -111,11 +113,11 @@ const Dashboard = () => {
     <div style={styles.container}>
       <div style={styles.header}>
         <div>
-          <h1 style={styles.welcomeText}>Welcome back, {user?.username}</h1>
-          <p style={styles.subtext}>Role: <span style={styles.roleTag}>{user?.role}</span></p>
+          <h1 style={styles.welcomeText}>{t('welcome_back')}, {user?.username}</h1>
+          <p style={styles.subtext}>{t('role_label')}: <span style={styles.roleTag}>{user?.role}</span></p>
         </div>
         <button onClick={fetchDashboardData} className="btn btn-secondary">
-          <RefreshCw size={16} /> Refresh
+          <RefreshCw size={16} /> {t('btn_refresh')}
         </button>
       </div>
 
@@ -126,7 +128,7 @@ const Dashboard = () => {
         <div className="dashboard-grid">
           <div className="glass-panel metric-card" style={styles.metricCard}>
             <div style={styles.metricHeader}>
-              <span className="metric-title">TOTAL FIELDS</span>
+              <span className="metric-title">{t('kpi_fields')}</span>
               <Activity size={20} color="#10b981" />
             </div>
             <span className="metric-value">{data.kpis.total_fields}</span>
@@ -134,7 +136,7 @@ const Dashboard = () => {
 
           <div className="glass-panel metric-card" style={styles.metricCard}>
             <div style={styles.metricHeader}>
-              <span className="metric-title">ACTIVE WARNINGS</span>
+              <span className="metric-title">{t('kpi_alerts')}</span>
               <AlertTriangle size={20} color={data.kpis.active_alerts > 0 ? '#ef4444' : '#64748b'} />
             </div>
             <span className="metric-value" style={data.kpis.active_alerts > 0 ? {color: '#ef4444'} : {}}>
@@ -144,7 +146,7 @@ const Dashboard = () => {
 
           <div className="glass-panel metric-card" style={styles.metricCard}>
             <div style={styles.metricHeader}>
-              <span className="metric-title">AVERAGE RISK RATE</span>
+              <span className="metric-title">{t('kpi_risk')}</span>
               <TrendingUp size={20} color="#f59e0b" />
             </div>
             <div>
@@ -157,7 +159,7 @@ const Dashboard = () => {
 
           <div className="glass-panel metric-card" style={styles.metricCard}>
             <div style={styles.metricHeader}>
-              <span className="metric-title">CROP IMAGES ANALYZED</span>
+              <span className="metric-title">{t('kpi_analyzed')}</span>
               <ImageIcon size={20} color="#3b82f6" />
             </div>
             <span className="metric-value">{data.kpis.images_analyzed}</span>
@@ -344,10 +346,10 @@ const styles = {
   },
   welcomeText: {
     fontSize: '28px',
-    color: '#fff',
+    color: 'var(--text-primary)',
   },
   subtext: {
-    color: '#94a3b8',
+    color: 'var(--text-secondary)',
     fontSize: '14px',
     marginTop: '4px',
   },
@@ -361,7 +363,7 @@ const styles = {
     border: '1px solid rgba(239, 68, 68, 0.2)',
     borderRadius: '8px',
     padding: '12px 16px',
-    color: '#fca5a5',
+    color: '#dc2626',
     marginBottom: '24px',
   },
   metricCard: {
@@ -374,7 +376,7 @@ const styles = {
     alignItems: 'center',
   },
   progressBarBg: {
-    background: 'rgba(255, 255, 255, 0.05)',
+    background: 'rgba(0, 0, 0, 0.06)',
     height: '6px',
     borderRadius: '3px',
     width: '100%',
@@ -444,10 +446,10 @@ const styles = {
     gap: '6px',
     flex: 1,
     '& h3': {
-      color: '#fff',
+      color: 'var(--text-primary)',
     },
     '& p': {
-      color: '#94a3b8',
+      color: 'var(--text-secondary)',
       fontSize: '13px',
     }
   },
@@ -468,7 +470,7 @@ const styles = {
   },
   recommendationText: {
     fontSize: '12px',
-    color: '#cbd5e1',
+    color: 'var(--text-secondary)',
     lineHeight: '1.4',
   },
   triggerBtn: {
@@ -521,16 +523,16 @@ const styles = {
     borderCollapse: 'collapse',
     fontSize: '13px',
     textAlign: 'left',
-    color: '#cbd5e1',
+    color: 'var(--text-secondary)',
     '& th': {
       padding: '12px',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-      color: '#94a3b8',
+      borderBottom: '1px solid var(--border-glass)',
+      color: 'var(--text-secondary)',
       fontWeight: '600',
     },
     '& td': {
       padding: '12px',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+      borderBottom: '1px solid var(--border-glass)',
     }
   },
   emptyText: {
