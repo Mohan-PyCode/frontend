@@ -3,9 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Sprout, Lock, User as UserIcon, Mail, Briefcase } from 'lucide-react';
 
 const CAROUSEL_IMAGES = [
-  'https://images.unsplash.com/photo-1566385278603-685b85a3a789?auto=format&fit=crop&w=1600&q=80', // fresh veggies
-  'https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&w=1600&q=80', // green vegetables
-  'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=1600&q=80'  // fresh inputs
+  'https://png.pngtree.com/thumb_back/fw800/background/20240925/pngtree-green-field-with-lines-of-crops-with-blur-bckground-on-sunny-image_16252105.jpg'
 ];
 
 const Login = ({ onBackToLanding }) => {
@@ -144,32 +142,28 @@ const Login = ({ onBackToLanding }) => {
         &rarr;
       </button>
 
-      <div className="login-card-white">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <div style={styles.logoContainer}>
-            <Sprout size={32} color="#10b981" />
+      <div className="login-card-glass">
+        {/* Top left circular green plant sprout logo, title and subtitle; Back to Home link top right */}
+        <div style={styles.headerRow}>
+          <div style={styles.logoTitleGroup}>
+            <div style={styles.logoContainer}>
+              <Sprout size={22} color="#166534" />
+            </div>
+            <div style={styles.titleSubtitleGroup}>
+              <h1 style={styles.title}>AgriPulse</h1>
+              <p style={styles.subtitle}>AI-Powered Crop Disease Early-Warning System</p>
+            </div>
           </div>
           {onBackToLanding && (
             <button
               type="button"
               onClick={onBackToLanding}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#64748b',
-                cursor: 'pointer',
-                fontSize: '13px',
-                fontWeight: '600',
-                textDecoration: 'underline'
-              }}
+              style={styles.backToHomeBtn}
             >
               Back to Home
             </button>
           )}
         </div>
-
-        <h1>AgriPulse</h1>
-        <p className="login-subtext">AI-Powered Crop Disease Early-Warning System</p>
 
         {!isRegister && (
           <div style={styles.tabs}>
@@ -178,8 +172,8 @@ const Login = ({ onBackToLanding }) => {
               onClick={() => { setLoginMode('password'); setValidationError(''); setSuccessMessage(''); setOtpSent(false); }}
               style={{ 
                 ...styles.tabBtn, 
-                borderBottomColor: loginMode === 'password' ? '#224b2a' : 'transparent', 
-                color: loginMode === 'password' ? '#224b2a' : '#64748b',
+                borderBottomColor: loginMode === 'password' ? '#166534' : 'transparent', 
+                color: loginMode === 'password' ? '#166534' : '#64748b',
                 background: 'none',
                 borderTop: 'none',
                 borderLeft: 'none',
@@ -195,8 +189,8 @@ const Login = ({ onBackToLanding }) => {
               onClick={() => { setLoginMode('otp'); setValidationError(''); setSuccessMessage(''); }}
               style={{ 
                 ...styles.tabBtn, 
-                borderBottomColor: loginMode === 'otp' ? '#224b2a' : 'transparent', 
-                color: loginMode === 'otp' ? '#224b2a' : '#64748b',
+                borderBottomColor: loginMode === 'otp' ? '#166534' : 'transparent', 
+                color: loginMode === 'otp' ? '#166534' : '#64748b',
                 background: 'none',
                 borderTop: 'none',
                 borderLeft: 'none',
@@ -369,27 +363,27 @@ const Login = ({ onBackToLanding }) => {
         </div>
 
         <div style={styles.roleButtonsGrid}>
-          <button type="button" onClick={() => fillCredentials('farmer')} style={styles.roleBtn} className="roleBtn">
+          <button type="button" onClick={() => fillCredentials('farmer')} style={styles.roleBtn}>
             <span style={styles.roleBtnEmoji}>🌾</span>
             <div style={styles.roleBtnText}>
-              <strong>Farmer</strong>
-              <span>farmer / farmer123</span>
+              <strong style={{ fontSize: '11px', fontWeight: '700', color: '#ffffff' }}>Farmer</strong>
+              <span style={{ fontSize: '9px', color: '#94a3b8' }}>farmer / farmer123</span>
             </div>
           </button>
           
-          <button type="button" onClick={() => fillCredentials('agronomist')} style={styles.roleBtn} className="roleBtn">
+          <button type="button" onClick={() => fillCredentials('agronomist')} style={styles.roleBtn}>
             <span style={styles.roleBtnEmoji}>🔬</span>
             <div style={styles.roleBtnText}>
-              <strong>Agronomist</strong>
-              <span>agronomist / agro123</span>
+              <strong style={{ fontSize: '11px', fontWeight: '700', color: '#ffffff' }}>Agronomist</strong>
+              <span style={{ fontSize: '9px', color: '#94a3b8' }}>agro / agro123</span>
             </div>
           </button>
 
-          <button type="button" onClick={() => fillCredentials('admin')} style={styles.roleBtn} className="roleBtn">
+          <button type="button" onClick={() => fillCredentials('admin')} style={styles.roleBtn}>
             <span style={styles.roleBtnEmoji}>⚙️</span>
             <div style={styles.roleBtnText}>
-              <strong>Admin</strong>
-              <span>admin / admin123</span>
+              <strong style={{ fontSize: '11px', fontWeight: '700', color: '#ffffff' }}>Admin</strong>
+              <span style={{ fontSize: '9px', color: '#94a3b8' }}>admin / admin123</span>
             </div>
           </button>
         </div>
@@ -399,30 +393,61 @@ const Login = ({ onBackToLanding }) => {
 };
 
 const styles = {
-  container: {
+  headerRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '24px',
+    width: '100%',
+  },
+  logoTitleGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  logoContainer: {
+    background: 'rgba(22, 101, 52, 0.08)',
+    padding: '8px',
+    borderRadius: '50%',
+    border: '1px solid rgba(22, 101, 52, 0.15)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: '80vh',
-    padding: '20px',
   },
-  card: {
-    width: '100%',
-    maxWidth: '450px',
-    padding: '40px',
-  },
-  header: {
+  titleSubtitleGroup: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: '30px',
-    textAlign: 'center',
+    textAlign: 'left',
+  },
+  title: {
+    fontSize: '20px',
+    fontWeight: '800',
+    color: '#0f172a',
+    margin: 0,
+    lineHeight: '1.2',
+    fontFamily: "'Outfit', sans-serif",
+  },
+  subtitle: {
+    fontSize: '10px',
+    color: '#475569',
+    margin: '2px 0 0 0',
+    fontFamily: "'Inter', sans-serif",
+  },
+  backToHomeBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#166534',
+    cursor: 'pointer',
+    fontSize: '12px',
+    fontWeight: '600',
+    textDecoration: 'underline',
+    padding: 0,
   },
   tabs: {
     display: 'flex',
     width: '100%',
-    marginBottom: '24px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    marginBottom: '20px',
+    borderBottom: '1px solid #e2e8f0',
   },
   tabBtn: {
     flex: 1,
@@ -430,44 +455,28 @@ const styles = {
     background: 'none',
     border: 'none',
     borderBottom: '2px solid transparent',
-    fontSize: '14px',
-    fontWeight: '600',
+    fontSize: '13px',
+    fontWeight: '700',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
     textAlign: 'center',
   },
-  logoContainer: {
-    background: 'rgba(16, 185, 129, 0.1)',
-    padding: '16px',
-    borderRadius: '50%',
-    marginBottom: '16px',
-    border: '1px solid rgba(16, 185, 129, 0.2)',
-  },
-  title: {
-    fontSize: '32px',
-    fontWeight: '800',
-    color: '#fff',
-    marginBottom: '8px',
-  },
-  subtitle: {
-    fontSize: '14px',
-    color: '#94a3b8',
-    lineHeight: '1.5',
-  },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '18px',
+    width: '100%',
   },
   inputGroup: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+    gap: '6px',
   },
   label: {
-    fontSize: '13px',
-    fontWeight: '500',
-    color: '#e2e8f0',
+    fontSize: '12px',
+    fontWeight: '600',
+    color: '#334155',
+    textAlign: 'left',
   },
   inputWrapper: {
     position: 'relative',
@@ -481,35 +490,54 @@ const styles = {
   },
   paddedInput: {
     paddingLeft: '44px',
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    border: '1px solid #cbd5e1',
+    color: '#0f172a',
+    borderRadius: '8px',
+    paddingTop: '12px',
+    paddingBottom: '12px',
+    fontSize: '14px',
   },
   submitBtn: {
     width: '100%',
-    marginTop: '8px',
+    marginTop: '6px',
+    background: 'linear-gradient(135deg, #166534 0%, #15803d 100%)',
+    border: '1px solid rgba(22, 101, 52, 0.2)',
+    color: '#ffffff',
+    fontWeight: '600',
+    padding: '12px 24px',
+    fontSize: '15px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(22, 101, 52, 0.15)',
   },
   alertDanger: {
     background: 'rgba(239, 68, 68, 0.1)',
     border: '1px solid rgba(239, 68, 68, 0.2)',
     borderRadius: '8px',
     padding: '12px 16px',
-    color: '#fca5a5',
-    fontSize: '14px',
+    color: '#991b1b',
+    fontSize: '13px',
+    textAlign: 'left',
   },
   alertSuccess: {
     background: 'rgba(16, 185, 129, 0.1)',
     border: '1px solid rgba(16, 185, 129, 0.2)',
     borderRadius: '8px',
     padding: '12px 16px',
-    color: '#a7f3d0',
-    fontSize: '14px',
+    color: '#065f46',
+    fontSize: '13px',
+    textAlign: 'left',
   },
   toggleContainer: {
-    marginTop: '16px',
+    marginTop: '12px',
     textAlign: 'center',
   },
   toggleBtn: {
     background: 'none',
     border: 'none',
-    color: '#10b981',
+    color: '#166534',
     cursor: 'pointer',
     fontSize: '13px',
     fontWeight: '500',
@@ -520,51 +548,47 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '30px 0 20px 0',
+    margin: '24px 0 16px 0',
+    width: '100%',
   },
   dividerText: {
-    background: '#0f172a',
-    padding: '0 12px',
-    fontSize: '12px',
-    color: '#64748b',
-    fontWeight: '600',
+    background: 'rgba(255, 255, 255, 0.9)',
+    padding: '0 10px',
+    fontSize: '10px',
+    color: '#166534',
+    fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
   roleButtonsGrid: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '8px',
+    width: '100%',
   },
   roleBtn: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    gap: '12px',
+    gap: '4px',
     width: '100%',
-    padding: '12px 16px',
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.05)',
+    padding: '10px 4px',
+    background: 'rgba(255, 255, 255, 0.6)',
+    border: '1px solid #e2e8f0',
     borderRadius: '8px',
-    color: '#f8fafc',
+    color: '#1e293b',
     cursor: 'pointer',
-    textAlign: 'left',
     transition: 'all 0.2s ease',
   },
   roleBtnEmoji: {
-    fontSize: '20px',
+    fontSize: '18px',
   },
   roleBtnText: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     gap: '2px',
-    fontSize: '13px',
-    '& strong': {
-      fontWeight: '600',
-    },
-    '& span': {
-      color: '#64748b',
-      fontSize: '11px',
-    }
+    textAlign: 'center',
   }
 };
 

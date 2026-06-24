@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../context/TranslationContext';
 import { User, Mail, Phone, Shield, Save, RefreshCw } from 'lucide-react';
 
 const ProfileSettings = () => {
   const { user, authenticatedFetch } = useAuth();
+  const { lang, setLang, t } = useTranslation();
   const [profile, setProfile] = useState(null);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -117,13 +119,13 @@ const ProfileSettings = () => {
 
         {/* SETTINGS FORM */}
         <div className="glass-panel" style={styles.card}>
-          <h2 style={styles.sectionHeader}>Edit Settings</h2>
+          <h2 style={styles.sectionHeader}>{t('nav_settings')}</h2>
           <form onSubmit={handleSubmit} style={styles.form}>
             {message && <div style={styles.alertSuccess}>{message}</div>}
             {error && <div style={styles.alertDanger}>{error}</div>}
 
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Email Address</label>
+              <label style={styles.label}>{t('lbl_email')}</label>
               <input
                 type="email"
                 value={email}
@@ -144,6 +146,19 @@ const ProfileSettings = () => {
               />
             </div>
 
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Application Language / भाषा का चयन</label>
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                className="input-control"
+              >
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
             <button type="submit" disabled={saving} className="btn btn-primary" style={styles.saveBtn}>
               <Save size={16} />
               {saving ? 'Saving Settings...' : 'Save Settings'}
@@ -161,11 +176,11 @@ const styles = {
   },
   title: {
     fontSize: '28px',
-    color: '#fff',
+    color: 'var(--text-primary)',
     marginBottom: '8px',
   },
   subtitle: {
-    color: '#94a3b8',
+    color: 'var(--text-secondary)',
     fontSize: '14px',
     marginBottom: '30px',
   },
@@ -179,7 +194,7 @@ const styles = {
   },
   sectionHeader: {
     fontSize: '20px',
-    color: '#fff',
+    color: 'var(--text-primary)',
     marginBottom: '20px',
     fontWeight: '600',
   },
@@ -202,7 +217,7 @@ const styles = {
   },
   metaVal: {
     fontSize: '14px',
-    color: '#cbd5e1',
+    color: 'var(--text-secondary)',
   },
   form: {
     display: 'flex',
@@ -216,7 +231,7 @@ const styles = {
   },
   label: {
     fontSize: '13px',
-    color: '#e2e8f0',
+    color: 'var(--text-secondary)',
   },
   saveBtn: {
     width: 'max-content',
@@ -227,7 +242,7 @@ const styles = {
     border: '1px solid rgba(16, 185, 129, 0.2)',
     borderRadius: '8px',
     padding: '12px 16px',
-    color: '#a7f3d0',
+    color: '#10b981',
     fontSize: '14px',
   },
   alertDanger: {
@@ -235,7 +250,7 @@ const styles = {
     border: '1px solid rgba(239, 68, 68, 0.2)',
     borderRadius: '8px',
     padding: '12px 16px',
-    color: '#fca5a5',
+    color: '#dc2626',
     fontSize: '14px',
   },
   loading: {

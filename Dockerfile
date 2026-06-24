@@ -19,7 +19,9 @@ FROM nginx:alpine
 # Copy built assets from Stage 1
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom nginx configuration if needed, else use default
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
